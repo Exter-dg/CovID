@@ -18,6 +18,7 @@
    - [ ] Filter by District
    - [ ] Filter by Pincode
    - [ ] Register for vaccination
+   - [x] Add Database
  - [ ] Covid Cases Dashboard
 
     
