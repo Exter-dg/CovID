@@ -23,6 +23,10 @@
     
 
 
+## Dependencies
+
+ - Dotenv
+
 
 
 ## Download and Installation
