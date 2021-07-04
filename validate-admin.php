@@ -1,4 +1,7 @@
 <?php
+	// start session
+	session_start();
+
 	//prompt function
     function alertmsg($alt_msg){
         echo("<script type='text/javascript'> 
@@ -31,6 +34,14 @@ if ($_SERVER["REQUEST_METHOD"]== "POST") {
     $result = mysqli_query($conn, $sql);
 	
     if (mysqli_num_rows($result) == 1) {
+
+		while($row = mysqli_fetch_assoc($result)) {
+			$name = $row["name"];
+		}
+
+		$_SESSION['adminvalid'] = true;
+		$_SESSION['adminusername'] = $name;
+
 		echo '<script type="text/javascript">';
 		echo 'window.location.href = "admin-home.php";';
 		echo '</script>';

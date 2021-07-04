@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if(!isset($_SESSION["adminvalid"]) || $_SESSION["adminvalid"]!="true")
+    {
+        echo("<script type='text/javascript'>alert('Access Denied'); </script>");
+        header('Refresh: 0; URL = admin-login.html');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
