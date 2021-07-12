@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST") {
     echo $aadhar;
     echo $password;
 	
-    $sql = "SELECT * FROM admin where aadharno = '$aadhar'
+    $sql = "SELECT CONCAT(fname, ' ', sname) AS name FROM admin WHERE aadharno = '$aadhar'
             and password = '$password'";
     
     $result = mysqli_query($conn, $sql);
