@@ -184,33 +184,7 @@
                     </form>
 
                     <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                    
+                    <ul class="navbar-nav ml-auto">                   
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -284,17 +258,14 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Add / Remove Slots</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p>Google and Facebook buttons are available featuring each company's respective
-                                        brand color. They are used on the user login and registration pages.</p>
-                                    <p>You can create more custom buttons by adding a new color variable in the
-                                        <code>_variables.scss</code> file and then using the Bootstrap button variant
-                                        mixin to create a new style, as demonstrated in the <code>_buttons.scss</code>
-                                        file.</p>
-                                    <a href="#" class="btn btn-secondary btn-icon-split">
+                                    <p>This will allow admins to display existing slots, add new slots or delete old ones.
+                                       Slots can also be searched on the basis of various filters.
+                                    </p>
+                                    <a href="admin-slots.php" class="btn btn-secondary btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-arrow-right"></i>
                                         </span>
-                                        <span class="text">Split Button Secondary</span>
+                                        <span class="text">Admin Slots Management</span>
                                     </a>
 
                                 </div>
@@ -311,16 +282,16 @@
                                 <div class="card-body">
                                     <!-- TODO Add a number of approvals left in a card or bar or something -->
 
-                                    <p>Works with any button colors, just use the <code>.btn-icon-split</code> class and
-                                        the markup in the examples below. The examples below also use the
-                                        <code>.text-white-50</code> helper class on the icons for additional styling,
-                                        but it is not required.</p>
+                                    <p>Admins that have registered are added in a temporary database. They need to be approved 
+                                       before they can login using their details and make changes to the system.
+                                       Existing admins with rights higher than the admins that have to be approved can approve new admins.
+                                    </p>
                                     
-                                    <a href="#" class="btn btn-secondary btn-icon-split">
+                                    <a href="admin-approve.php" class="btn btn-secondary btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-arrow-right"></i>
                                         </span>
-                                        <span class="text">Split Button Secondary</span>
+                                        <span class="text">Admin Management</span>
                                     </a>
                                     
                                 </div>
