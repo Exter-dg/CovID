@@ -7,6 +7,14 @@
     }
 ?>
 
+<!-- Load Required Files -->
+<?php
+    // Load dbconnect 
+    require_once('sql/dbconnect.php');
+    
+    require_once('validation-functions.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,11 +40,6 @@
 </head>
 
 <body id="page-top">
-
-    <!-- Load dbconnect -->
-    <?php
-        include_once('sql/dbconnect.php');
-    ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
