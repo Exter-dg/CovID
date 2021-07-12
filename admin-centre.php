@@ -406,26 +406,77 @@
                                     
                                     <?php
                                         if(isset($_POST['submit-insert'])) {
-                                            $id=$_POST['id'];   
-                                            $name=$_POST['name'];
-                                            $did=$_POST['district'];
-                                            $pincode=$_POST['pincode'];
-                                            $sid=$_POST['state'];
+                                            $id = test_input($_POST['id']);   
+                                            $name = test_input($_POST['name']);
+                                            $did = test_input($_POST['district']);
+                                            $pincode = test_input($_POST['pincode']);
+                                            $sid = test_input($_POST['state']);
 
-                                            $sql = "INSERT INTO centres (id, name, pincode, did, sid) VALUES
+                                            $err="";
+
+                                            // * True indicates no error
+                                            $error_flag = true;
+                                            
+                                            if($error_flag && !validate_not_empty($id)) {
+                                                $err.= "Centre ID is required!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_not_empty($did)) {
+                                                $err.= "District ID is required!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_not_empty($sid)) {
+                                                $err.= "State ID is required!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_not_empty($name)) {
+                                                $err.= "Name is required!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_not_empty($pincode)) {
+                                                $err.= "Pincode is required!\n";
+                                                $error_flag = false;
+                                            }
+                                            
+
+                                            if($error_flag && !validate_number($id)) {
+                                                $err.= "Centre ID must be a Number!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_number($did)) {
+                                                $err.= "District ID must be a Number!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_number($sid)) {
+                                                $err.= "State ID must be a Number!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_text_with_space($name)) {
+                                                $err.= "Centre Name must only contain letters and spaces!\n";
+                                                $error_flag = false;
+                                            }
+
+                                            if($error_flag) {
+                                                $sql = "INSERT INTO centres (id, name, pincode, did, sid) VALUES
                                                     ('$id', '$name', '$pincode', '$did', '$sid')";
 
-                                            $data=$conn->query($sql);
-                                            if($data)
-                                                echo "<script>alert('Inserted Successfully')</script>";
-                                            else
-                                            { 
-                                                $error = "SQL: " . $sql . "\n\n" . "Error: " . $conn->error;
-                                             
-                                                // ! $error is in `` and not '' as the message itself contains " and ' inside it.
-                                                // ! If $error is put in those commas, an alert box would not be displayed.
-                                                echo "<script type='text/javascript'>alert(`$error`);</script>";
-                                            }   
+                                                $data=$conn->query($sql);
+                                                if($data)
+                                                    echo "<script>alert('Inserted Successfully')</script>";
+                                                else
+                                                { 
+                                                    $error = "SQL: " . $sql . "\n\n" . "Error: " . $conn->error;
+                                                
+                                                    // ! $error is in `` and not '' as the message itself contains " and ' inside it.
+                                                    // ! If $error is put in those commas, an alert box would not be displayed.
+                                                    echo "<script type='text/javascript'>alert(`$error`);</script>";
+                                                }   
+                                            }
+                                            else {
+                                                echo "<script type='text/javascript'>alert(`$err`);</script>";
+                                            }
+
+                                            
                                         }
                                     ?>
 
@@ -468,28 +519,66 @@
                                         <input type="submit" name="submit-remove" value="Submit" class="btn btn-primary btn-user btn-block">
 
                                     </form>     
-                                    
+                                    // TODO Display centres with a button to delete them - as in approve admins
                                     <?php
-                                        if(isset($_POST['submit-remove'])) {
-                                            $id=$_POST['id'];  
-                                            $sid=$_POST['sid'];
-                                            $did=$_POST['did'];   
+                                        if(isset($_POST['submit-remove'])) { 
                                             
-                                            $sql = "DELETE FROM centres WHERE sid='$sid'  AND did='$did' AND id='$id'";
+                                            $id = test_input($_POST['id']); 
+                                            $did = test_input($_POST['did']); 
+                                            $sid = test_input($_POST['sid']);  
+                                            
+                                            $err="";
 
-                                            $data=$conn->query($sql);
+                                            // * True indicates no error
+                                            $error_flag = true;
                                             
-                                            // TODO Even if data doesn't exists, it still displays deleted successfully.
-                                            if($data)
-                                                echo "<script>alert('Deleted Successfully')</script>";
-                                            else
-                                            { 
-                                                $error = "SQL: " . $sql . "\n\n" . "Error: " . $conn->error;
-                                             
-                                                // ! $error is in `` and not '' as the message itself contains " and ' inside it.
-                                                // ! If $error is put in those commas, an alert box would not be displayed.
-                                                echo "<script type='text/javascript'>alert(`$error`);</script>";
-                                            }   
+                                            if($error_flag && !validate_not_empty($id)) {
+                                                $err.= "Centre ID is required!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_not_empty($did)) {
+                                                $err.= "District ID is required!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_not_empty($sid)) {
+                                                $err.= "State ID is required!\n";
+                                                $error_flag = false;
+                                            }
+
+                                            if($error_flag && !validate_number($id)) {
+                                                $err.= "Centre ID must be a Number!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_number($did)) {
+                                                $err.= "District ID must be a Number!\n";
+                                                $error_flag = false;
+                                            }
+                                            if($error_flag && !validate_number($sid)) {
+                                                $err.= "State ID must be a Number!\n";
+                                                $error_flag = false;
+                                            }
+
+                                            if($error_flag) {
+                                                $sql = "DELETE FROM centres WHERE sid='$sid'  AND did='$did' AND id='$id'";
+
+                                                $data=$conn->query($sql);
+                                                
+                                                // TODO Even if data doesn't exists, it still displays deleted successfully.
+                                                if($data)
+                                                    echo "<script>alert('Deleted Successfully')</script>";
+                                                else
+                                                { 
+                                                    $error = "SQL: " . $sql . "\n\n" . "Error: " . $conn->error;
+                                                
+                                                    // ! $error is in `` and not '' as the message itself contains " and ' inside it.
+                                                    // ! If $error is put in those commas, an alert box would not be displayed.
+                                                    echo "<script type='text/javascript'>alert(`$error`);</script>";
+                                                }   
+                                            }
+                                            else {
+                                                echo "<script type='text/javascript'>alert(`$err`);</script>";
+                                            }
+                                            
                                         }
                                     ?>
                                 </div>
