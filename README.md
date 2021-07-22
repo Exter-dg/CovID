@@ -11,12 +11,14 @@
 ## Status
 
  - [ ] Vaccine Registration
-   - [ ] Admin Login Page
-     - [ ] Create/Delete Center
-     - [ ] Create/Delete Slots
-   - [ ] Search Slots
-   - [ ] Filter by District
-   - [ ] Filter by Pincode
+   - [x] Admin Login Page
+     - [x] Create/Delete Center
+     - [x] Create/Delete Slots
+     - [x] Approve Admins
+   - [x] Admin Registration
+   - [x] Search Slots
+   - [x] Filter by District
+   - [x] Filter by Pincode
    - [ ] Register for vaccination
    - [x] Add Database
  - [ ] Covid Cases Dashboard
