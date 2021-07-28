@@ -31,8 +31,16 @@
         return true;
     }
 
+    // TODO Change Implementation to include 2nd parameter - required_digits
     function validate_number($data) {
         if(!preg_match("/^[0-9]*$/",$data))
+            return false;
+        return true;
+    }
+
+    // * Returns true if age is >= the required age
+    function validate_age($age, $required_age) {
+        if($age < $required_age)
             return false;
         return true;
     }
