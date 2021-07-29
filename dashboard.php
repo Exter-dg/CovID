@@ -1,3 +1,46 @@
+<?php
+    // api URL
+    $url = "https://api.rootnet.in/covid19-in/stats/latest";
+
+    // Collection Object
+    $data = [
+        'collection' => 'total'
+    ];
+
+    // Initializes a new cURL session
+    $curl = curl_init($url);
+
+    // 1. Set the CURLOPT_RETURNTRANSFER option to true
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    // 2. Set the CURLOPT_POST option to true for POST request
+    curl_setopt($curl, CURLOPT_POST, true);
+    // 3. Set the request data as JSON using json_encode function
+    curl_setopt($curl, CURLOPT_POSTFIELDS,  json_encode($data));
+
+    // Execute cURL request with all previous settings
+    $response = curl_exec($curl);
+
+    // Close cURL session
+    curl_close($curl);
+    //echo $response . PHP_EOL;
+
+    $response = json_decode($response);
+
+    // Total Cases
+    $total_cases = $response->data->summary->total;
+
+    // Discharged Cases
+    $discharged_cases = $response->data->summary->discharged;
+    // Active Cases
+    $active_cases = $total_cases - $discharged_cases;
+
+
+    // Set cookie
+    setcookie("active_cases", $active_cases);
+    setcookie("total_cases", $total_cases);
+    setcookie("discharged_cases", $discharged_cases);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -363,8 +406,27 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-
+                    <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+                    
+                    <!-- Donut Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Covid Cases Chart</h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4">
+                                    <canvas id="casesPieChart"></canvas>
+                                </div>
+                                <hr>
+                                Total Cases: <?php echo "$total_cases"; ?> <br>
+                                Discharged Cases: <?php echo "$discharged_cases"; ?> <br>
+                                Active Cases: <?php echo "$active_cases"; ?> <br>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -422,6 +484,11 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/dashboard/chart-pie-cases.js"></script>
 </body>
 
 </html>
