@@ -37,7 +37,7 @@
 
 ## Usage
 
-
-
-
 ## Bugs and Issues
+* [feature] Add copyright notice to all files that use startbootstraps's code ([#9][i9])
+
+[i9]: https://github.com/Exter-dg/CovID/issues/9
