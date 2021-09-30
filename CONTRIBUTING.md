@@ -1,7 +1,9 @@
 # Contributing
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
+When contributing to this repository, **please first discuss the change you wish to make via the issue**,
 email, or any other method with the owners of this repository before making a change. 
+
+**Also, Before you start working on a issue, claim it and wait for it to be assigned to you!!!**
 
 
 ## Pull Request Process
