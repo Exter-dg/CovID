@@ -78,4 +78,5 @@ Feel free to discuss any doubts/ideas you might have.
 - If you are new to Git - [Git & Github for Beginners](https://www.youtube.com/watch?v=SWYqp7iY_Tc)
 - For a more detailed understanding of the git flow - [Git Workflow Explained](https://medium.com/@swinkler/git-workflow-explained-a-step-by-step-guide-83c1c9247f03)
 - **Before making changes, refer - [CONTRIBUTING.md](https://github.com/Exter-dg/CovID/blob/master/CONTRIBUTING.md)**
+- Writing good commit messages - [5 Useful Tips For A Better Commit Message](https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message)
 
