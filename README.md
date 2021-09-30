@@ -22,6 +22,9 @@ There are three modules - Admin, User and Dashboard. The dashboard aims to displ
  - `admin-slots.php` - Used for displaying/adding/deleting slots
  - `admin-logout.php` - Logs out admin
  - `dashboard.php` - Displays dashboard for current statistics using APIs
+ - `validate-admin.php` - Checks if the credentials entered for admin are correct and stores necessary values in form of session variables.
+ - `validation-functions.php` - Contains various functions for parsing/validating data throughout the site.
+ - All html files except for `admin-login.html` are part of the original template from startbootstrap. These are kept only for reference while creating other pages. No changes should be made to them unless absolutely necessary
 </details>
 
 <br><br>
