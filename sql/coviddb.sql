@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2021 at 12:43 PM
+-- Generation Time: Sep 30, 2021 at 07:06 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -31,10 +31,20 @@ CREATE TABLE `admin` (
   `fname` varchar(30) NOT NULL,
   `mname` varchar(30) DEFAULT NULL,
   `sname` varchar(30) NOT NULL,
-  `aadharno` int(12) NOT NULL,
+  `aadharno` bigint(12) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `rights` varchar(7) NOT NULL
+  `rights` varchar(7) NOT NULL,
+  `password` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`fname`, `mname`, `sname`, `aadharno`, `email`, `rights`, `password`) VALUES
+('Manoj', '', 'Shah', 111122223333, 'manoj@gmail.com', 'S-7', 'manoj'),
+('jash', '', 'maurya', 111122223337, 'j@gmail.com', 'S-7', 'parth'),
+('Parth', NULL, 'Kapadia', 123412341234, 'parth@gmail.com', 'I', 'parth');
 
 -- --------------------------------------------------------
 
@@ -46,11 +56,18 @@ CREATE TABLE `adminapprove` (
   `fname` varchar(30) NOT NULL,
   `mname` varchar(30) DEFAULT NULL,
   `sname` varchar(30) NOT NULL,
-  `aadharno` int(12) NOT NULL,
+  `aadharno` bigint(12) NOT NULL,
   `email` varchar(30) NOT NULL,
   `rights` varchar(7) NOT NULL,
-  `status` enum('0','1') NOT NULL DEFAULT '0'
+  `password` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `adminapprove`
+--
+
+INSERT INTO `adminapprove` (`fname`, `mname`, `sname`, `aadharno`, `email`, `rights`, `password`) VALUES
+('Manoj', '', 'Patel', 111122223335, 'm2@gmai.com', 'S-7', 'parth');
 
 -- --------------------------------------------------------
 
@@ -69,6 +86,27 @@ CREATE TABLE `administered` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `centres`
+--
+
+CREATE TABLE `centres` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `pincode` int(11) NOT NULL,
+  `did` int(30) NOT NULL,
+  `sid` int(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `centres`
+--
+
+INSERT INTO `centres` (`id`, `name`, `pincode`, `did`, `sid`) VALUES
+(1, 'Nirma Uni', 382481, 1, 7);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `city`
 --
 
@@ -78,6 +116,13 @@ CREATE TABLE `city` (
   `sid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `city`
+--
+
+INSERT INTO `city` (`cityname`, `id`, `sid`) VALUES
+('Ahmedabad', 1, 7);
+
 -- --------------------------------------------------------
 
 --
@@ -86,14 +131,19 @@ CREATE TABLE `city` (
 
 CREATE TABLE `slots` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  `pincode` int(11) NOT NULL,
-  `district` varchar(30) NOT NULL,
-  `state` varchar(30) NOT NULL,
+  `did` int(11) NOT NULL,
+  `sid` int(11) NOT NULL,
   `vid` int(11) NOT NULL,
   `slots` int(11) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `slots`
+--
+
+INSERT INTO `slots` (`id`, `did`, `sid`, `vid`, `slots`, `date`) VALUES
+(1, 1, 7, 1, 95, '2021-07-26');
 
 -- --------------------------------------------------------
 
@@ -105,6 +155,13 @@ CREATE TABLE `state` (
   `statename` varchar(30) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `state`
+--
+
+INSERT INTO `state` (`statename`, `id`) VALUES
+('Gujarat', 7);
 
 -- --------------------------------------------------------
 
@@ -118,10 +175,18 @@ CREATE TABLE `user` (
   `sname` varchar(25) NOT NULL,
   `age` int(3) NOT NULL,
   `mno` bigint(10) NOT NULL,
-  `aadharno` varchar(12) NOT NULL,
-  `dose` enum('0','1','2') NOT NULL,
-  `vaccine` varchar(15) NOT NULL
+  `aadharno` bigint(12) NOT NULL,
+  `dose` enum('0','1','2') DEFAULT NULL,
+  `vaccine` varchar(15) DEFAULT NULL,
+  `password` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`fname`, `mname`, `sname`, `age`, `mno`, `aadharno`, `dose`, `vaccine`, `password`) VALUES
+('Jash', '', 'Chauhan', 18, 1234567890, 123412347777, '1', '1', 'jash');
 
 -- --------------------------------------------------------
 
@@ -133,6 +198,13 @@ CREATE TABLE `vaccine` (
   `id` int(11) NOT NULL,
   `vaccine` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vaccine`
+--
+
+INSERT INTO `vaccine` (`id`, `vaccine`) VALUES
+(1, 'Covishield');
 
 --
 -- Indexes for dumped tables
@@ -149,6 +221,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `adminapprove`
   ADD PRIMARY KEY (`aadharno`);
+
+--
+-- Indexes for table `centres`
+--
+ALTER TABLE `centres`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `city`
