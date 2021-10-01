@@ -25,6 +25,9 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!--Sweetalert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 </head>
 
 <body class="bg-gradient-primary">
@@ -116,14 +119,14 @@
             
             $data=$conn->query($sql);
             if($data)
-                echo "<script>alert('Inserted Successfully')</script>";
+                echo "<script> swal('Registered!','Please wait till your admin role is approved','success')</script>";
             else
             { 
                 $error = "SQL: " . $sql . "\n\n" . "Error: " . $conn->error;
                 
                 // ! $error is in `` and not '' as the message itself contains " and ' inside it.
                 // ! If $error is put in those commas, an alert box would not be displayed.
-                echo "<script type='text/javascript'>alert(`$error`);</script>";
+                echo "<script> swal('Oops!',`$error`,'error')</script>";
             }  
         }
     ?>

@@ -33,6 +33,9 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">  
 
+    <!--Sweetalert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 </head>
 
 <body id="page-top">
@@ -282,14 +285,17 @@
                                             $data=$conn->query($sql);
                                             
                                             if($data)
-                                                echo "<script>alert('Request Deleted Successfully')</script>";
+                                            {
+                                                echo "<script>swal('Deleted!','Admin Request is deleted','success').then(function(){window.location.href='admin-approve.php';})</script>";
+                                            }
                                             else
                                             { 
                                                 $error = "SQL: " . $sql . "\n\n" . "Error: " . $conn->error;
                                              
                                                 // ! $error is in `` and not '' as the message itself contains " and ' inside it.
                                                 // ! If $error is put in those commas, an alert box would not be displayed.
-                                                echo "<script type='text/javascript'>alert(`$error`);</script>";
+                                                //echo "<script type='text/javascript'>alert(`$error`);</script>";
+                                                echo "<script> swal('Oops!',`$error`,'error')</script>";
                                             }   
                                         }
 
@@ -307,7 +313,7 @@
                                             $data=$conn->query($sql);
                                             if($data)
                                             {
-                                                echo "<script>alert('Approved Successfully')</script>";
+                                                echo "<script>swal('Approved!','Admin Request is accepted','success')</script>";
                                                 deny($conn, $row[3]);
                                             }
                                             else
@@ -316,7 +322,7 @@
                                              
                                                 // ! $error is in `` and not '' as the message itself contains " and ' inside it.
                                                 // ! If $error is put in those commas, an alert box would not be displayed.
-                                                echo "<script type='text/javascript'>alert(`$error`);</script>";
+                                                echo "<script> swal('Oops!',`$error`,'error')</script>";
                                             }  
                                         }
 
