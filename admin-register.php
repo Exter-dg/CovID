@@ -28,7 +28,7 @@
 </head>
 
 <body class="bg-gradient-primary">
-
+<a title ="Click to go back to home" href="index.html"><i class="far fa-2x fa-arrow-alt-circle-left whiteicon"></i></a>
     <div class="container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
