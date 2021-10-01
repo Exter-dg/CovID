@@ -86,7 +86,7 @@
                                 </div>
                                 <br>
                                 <hr>
-                                <input type="submit" name="register" value="Register Account" class="btn btn-primary btn-user btn-block">
+                                <input type="submit" name="register" value="Register Account" class="btn btn-primary btn-user btn-block" href="admin-login.html">
                             
                             </form>
                             <hr>
