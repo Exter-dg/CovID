@@ -120,6 +120,9 @@
             $data=$conn->query($sql);
             if($data)
                 echo "<script> swal('Registered!','Please wait till your admin role is approved','success')</script>";
+                echo '<script type="text/javascript">';
+		        echo 'window.location.href = "admin-login.html";';
+		        echo '</script>';
             else
             { 
                 $error = "SQL: " . $sql . "\n\n" . "Error: " . $conn->error;
