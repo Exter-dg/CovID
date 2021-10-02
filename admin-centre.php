@@ -502,91 +502,97 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Remove Centres</h6>
                                 </div>
                                 <div class="card-body">
-                                <form class="user" id="form-insert" method="post">
-                                    <div class="form-group row">
+                                <?php
+                                    function delete($conn, $id) {
+                                        $sql = "DELETE FROM centres WHERE id=$id";
 
-                                            <div class="col-sm-12 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" name="id"
-                                                       placeholder="Centre ID">
-                                            </div>                                        
-                                        </div>
-                                        <div class="form-group row">
+                                        $data=$conn->query($sql);
 
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" name="did"
-                                                       placeholder="District ID">
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="text" class="form-control form-control-user" name="sid"
-                                                       placeholder="State ID">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <input type="submit" name="submit-remove" value="Submit" class="btn btn-primary btn-user btn-block">
-
-                                    </form>     
-                                    // TODO Display centres with a button to delete them - as in approve admins
-                                    <?php
-                                        if(isset($_POST['submit-remove'])) { 
-                                            
-                                            $id = test_input($_POST['id']); 
-                                            $did = test_input($_POST['did']); 
-                                            $sid = test_input($_POST['sid']);  
-                                            
-                                            $err="";
-
-                                            // * True indicates no error
-                                            $error_flag = true;
-                                            
-                                            if($error_flag && !validate_not_empty($id)) {
-                                                $err.= "Centre ID is required!\n";
-                                                $error_flag = false;
-                                            }
-                                            if($error_flag && !validate_not_empty($did)) {
-                                                $err.= "District ID is required!\n";
-                                                $error_flag = false;
-                                            }
-                                            if($error_flag && !validate_not_empty($sid)) {
-                                                $err.= "State ID is required!\n";
-                                                $error_flag = false;
-                                            }
-
-                                            if($error_flag && !validate_number($id)) {
-                                                $err.= "Centre ID must be a Number!\n";
-                                                $error_flag = false;
-                                            }
-                                            if($error_flag && !validate_number($did)) {
-                                                $err.= "District ID must be a Number!\n";
-                                                $error_flag = false;
-                                            }
-                                            if($error_flag && !validate_number($sid)) {
-                                                $err.= "State ID must be a Number!\n";
-                                                $error_flag = false;
-                                            }
-
-                                            if($error_flag) {
-                                                $sql = "DELETE FROM centres WHERE sid='$sid'  AND did='$did' AND id='$id'";
-
-                                                $data=$conn->query($sql);
-                                                
-                                                // TODO Even if data doesn't exists, it still displays deleted successfully.
-                                                if($data)
-                                                    echo "<script> swal('Deleted!','Centre has been removed','success').then(function(){window.location.href='admin-centre.php';})</script>";
-                                                else
-                                                { 
-                                                    $error = "SQL: " . $sql . "\n\n" . "Error: " . $conn->error;
-                                                
-                                                    // ! $error is in `` and not '' as the message itself contains " and ' inside it.
-                                                    // ! If $error is put in those commas, an alert box would not be displayed.
-                                                    echo "<script> swal('Oops!',`$error`,'error')</script>";
-                                                }   
-                                            }
-                                            else {
-                                                echo "<script> swal('Recheck!',`$err`,'error')</script>";
-                                            }
-                                            
+                                        if($data)
+                                        {
+                                            echo "<script>swal('Deleted!','Centre Removed Successfully','success').then(function(){window.location.href='admin-centre.php';})</script>";
                                         }
-                                    ?>
+                                        else
+                                        {
+                                            $error = "SQL: " . $sql . "\n\n" . "Error: " . $conn->error;
+                                             
+                                            // ! $error is in `` and not '' as the message itself contains " and ' inside it.
+                                            // ! If $error is put in those commas, an alert box would not be displayed.
+                                            //echo "<script type='text/javascript'>alert(`$error`);</script>";
+                                            echo "<script> swal('Oops!',`$error`,'error')</script>";
+                                        }
+                                    }
+
+                                    $sql = "SELECT * FROM centres";
+                                    $data=$conn->query($sql);
+                                    if($data) {
+                                        echo "<div class='table-responsive'> 
+                                                <table class='table table-bordered' id='dataTableOne' width='100%' cellspacing='0'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Centre Name</th>
+                                                            <th>Pincode</th>
+                                                            <th>District ID</th>
+                                                            <th>State ID</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Centre Name</th>
+                                                            <th>Pincode</th>
+                                                            <th>District ID</th>
+                                                            <th>State ID</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>";
+                                        while($row=$data->fetch_assoc())
+                                        {
+                                            echo "
+                                            <tr>
+                                                <td>".$row["id"]."</td>
+                                                <td>".$row["name"]."</td>
+                                                <td>".$row["pincode"]."</td>
+                                                <td>".$row["did"]."</td>
+                                                <td>".$row["sid"]."</td>
+                                                <td>
+                                                    <form method=\"POST\">";
+                                    
+                                            // * Create hidden tags for each row element an add them to result so that result can be passed as an array
+                                            foreach($row as $val)
+                                            {
+                                                echo '<input type="hidden" name="result[]" value="'. $val. '">';
+                                            }
+
+                        
+                                                echo "  <input type=\"submit\" name=\"delete\" 
+                                                            value=\"Delete Centre\" class='btn-lg btn-danger btn-icon-split ml-5 p-1 pl-3 pr-3' >
+                                                        </input> 
+                                                    </form>
+                                                </td>
+                                            </tr>";  
+                                        }
+
+                                        if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['delete'])) {
+                                            $result = $_POST['result'];
+                                            
+                                            // 0 is the key for id in result
+                                            delete($conn, $result[0]);
+                                            unset($_POST['delete']);
+                                        }
+
+                                        echo "      </tbody>
+                                        </table>
+                                      </div>";
+                                    }
+                                    else {
+                                        echo "Couldn't Fetch Data";
+                                    }
+                                ?>
+                                
                                 </div>
                             </div>
 
