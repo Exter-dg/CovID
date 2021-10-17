@@ -112,7 +112,7 @@
             $email=$_POST['email'];    
             $aadhar=$_POST['aadhar'];
             $rights=$_POST['rights'];
-            $password=$_POST['password'];
+            $password=md5($_POST['password']);
 
             $sql = "INSERT INTO adminapprove (fname, mname, sname, aadharno, email, rights, password) 
                     VALUES ('$fname', '$mname', '$sname', '$aadhar', '$email', '$rights', '$password')";
